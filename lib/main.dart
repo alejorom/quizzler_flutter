@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 import 'package:quizzler/question.dart';
 
 void main() => runApp(const Quizzler());
@@ -98,7 +99,8 @@ class _QuizPageState extends State<QuizPage> {
                 if (correctAnswer == true) { print('Correct'); }
                 else { print('InCorrect'); }
                 setState(() {
-                  questionNumber++;
+                  //questionNumber++;
+                  questionNumber = Random().nextInt(questionBank.length);
                 });
               },
             ),
@@ -121,7 +123,8 @@ class _QuizPageState extends State<QuizPage> {
                 if (correctAnswer == false) { print('Correct'); }
                 else { print('InCorrect'); }
                 setState(() {
-                  questionNumber++;
+                  //questionNumber++;
+                  questionNumber = Random().nextInt(questionBank.length);
                 });
               },
             ),
