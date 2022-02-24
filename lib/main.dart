@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(const Quizzler());
@@ -31,12 +33,35 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
 
-  List <Icon> scoreKeeper = [
-    const Icon (
-      Icons.check,
-      color:  Colors.green,
-    ),
+  List <Icon> scoreKeeper = [];
+
+  List <String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.',
+    'The Big Apple is a nickname given to Washington D.C in 1971.',
+    'Peanuts are not nuts!',
+    'Electrons move faster than the speed of light.',
+    'Light travels in a straight line.',
+    'The Great Wall of China is visible from space.',
+    'The Atlantic Ocean is the warmest in the world.',
+    'There are more ancient pyramids in Sudan than in Egypt.',
   ];
+
+  List <bool> answers = [
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    false,
+    false,
+  ];
+
+  int questionNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +69,15 @@ class _QuizPageState extends State<QuizPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        const Expanded(
+        Expanded(
           flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                questions[questionNumber],
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
                 ),
@@ -74,13 +99,9 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                bool correctAnswer = answers[questionNumber];
                 setState(() {
-                  scoreKeeper.add(
-                    const Icon(
-                        Icons.check,
-                        color: Colors.green
-                    ),
-                  );
+                  questionNumber++;
                 });
               },
             ),
@@ -100,12 +121,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  scoreKeeper.add(
-                    const Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                  );
+                  questionNumber++;
                 });
               },
             ),
@@ -120,7 +136,14 @@ class _QuizPageState extends State<QuizPage> {
 }
 
 /*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
+'You can lead a cow down stairs but not up stairs.', false,
+'Approximately one quarter of human bones are in the feet.', true,
+'A slug\'s blood is green.', true,
+'The Big Apple is a nickname given to Washington D.C in 1971.', true
+'Peanuts are not nuts!', true
+'Electrons move faster than the speed of light.', false
+'Light travels in a straight line.', true
+'The Great Wall of China is visible from space.', false
+'The Atlantic Ocean is the warmest in the world.', false
+'There are more ancient pyramids in Sudan than in Egypt.', false
 */
