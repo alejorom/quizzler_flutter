@@ -54,8 +54,8 @@ class QuizBrain {
         questionAnswer: true),
     Question(
         questionText:
-            'The loudest sound produced by any animal is 188 decibels. That animal is the African Elephant.',
-        questionAnswer: false),
+            'Emus can’t fly.',
+        questionAnswer: true),
     Question(
         questionText:
             'The total surface area of two human lungs is approximately 70 square metres.',
@@ -186,6 +186,10 @@ class QuizBrain {
 
   int getQuestionWrong(){
     return _questionWrong;
+  }
+
+  int getQuestionCounter(){
+    return _questionCounter + 1;
   }
 
   void reset() {

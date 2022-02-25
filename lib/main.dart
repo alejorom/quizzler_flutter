@@ -43,12 +43,26 @@ class _QuizPageState extends State<QuizPage> {
   void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getQuestionAnswer();
     setState(() {
+      // Validar respuesta del usuario.
+      if (correctAnswer == userPickedAnswer) {
+        quizBrain.setQuestionCorrect();
+        scoreKeeper.add(
+          const Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+        );
+      } else {
+        quizBrain.setQuestionWrong();
+        scoreKeeper.add(
+          const Icon(
+            Icons.close,
+            color: Colors.red,
+          ),
+        );
+      }
 
-
-
-
-
-
+      // Validar fin de las preguntas
       if (quizBrain.isFinished() == true) {
         Alert(
           context: context,
@@ -77,23 +91,6 @@ class _QuizPageState extends State<QuizPage> {
         quizBrain.reset();
         scoreKeeper = [];
       } else {
-        if (correctAnswer == userPickedAnswer) {
-          quizBrain.setQuestionCorrect();
-          scoreKeeper.add(
-            const Icon(
-              Icons.check,
-              color: Colors.green,
-            ),
-          );
-        } else {
-          quizBrain.setQuestionWrong();
-          scoreKeeper.add(
-            const Icon(
-              Icons.close,
-              color: Colors.red,
-            ),
-          );
-        }
         quizBrain.nextQuestion();
       }
     });
@@ -101,11 +98,25 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Center(
+              child: Text(
+                "#" + quizBrain.getQuestionCounter().toString(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 40.0,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
         Expanded(
           flex: 5,
           child: Padding(
