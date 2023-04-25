@@ -70,20 +70,20 @@ class _QuizPageState extends State<QuizPage> {
           desc: 'You\'ve reached the end of the quiz.',
           buttons: [
             DialogButton(
+              onPressed: () => Navigator.pop(context),
+              color: Colors.green,
               child: Text(
                 quizBrain.getQuestionCorrect().toString(),
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
-              onPressed: () => Navigator.pop(context),
-              color: Colors.green,
             ),
             DialogButton(
+              onPressed: () => Navigator.pop(context),
+              color: Colors.red,
               child: Text(
                 quizBrain.getQuestionWrong().toString(),
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
-              onPressed: () => Navigator.pop(context),
-              color: Colors.red,
             ),
           ],
         ).show();
@@ -107,7 +107,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                "#" + quizBrain.getQuestionCounter().toString(),
+                "#${quizBrain.getQuestionCounter()}",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 40.0,
